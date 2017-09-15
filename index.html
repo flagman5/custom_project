@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>Signin Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/example.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="js/typeahead.js"></script>
+    <!-- Custom styles for this template -->
+  </head>
+
+  <body>
+
+    <div class="container" id="search_form">
+
+      <form class="form-signin">
+        <h1 class="form-signin-heading">Please take a look</h1>
+        <label for="inputEmail" class="sr-only">Search for a product</label>
+        <input type="text" name="search_query" id="inputProduct" class="form-control typeahead" placeholder="Search for Product" required autofocus>
+        <br/><br/>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Search</button>
+      </form>
+
+    </div> <!-- /container -->
+  </body>
+  <script>
+
+  var products2 = new Bloodhound({
+   datumTokenizer: Bloodhound.tokenizers.whitespace,
+   queryTokenizer: Bloodhound.tokenizers.whitespace,
+  // url points to a json file that contains an array of country names, see
+  // https://github.com/twitter/typeahead.js/blob/gh-pages/data/countries.json
+   prefetch: {url:'prefetch.json', ttl:0}
+   remote: {
+     url: 'http://35.165.228.154/testing/getProducts.php?wild=1&q=%QUERY',
+     wildcard: '%QUERY'
+   }
+
+});
+// passing in `null` for the `options` arguments will result in the default
+// options being used
+$('#search_form .typeahead').typeahead(null, {
+  name: 'products2',
+  source: products2
+});
+</script>
+</html>
