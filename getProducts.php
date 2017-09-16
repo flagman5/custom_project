@@ -33,3 +33,22 @@ while($row = $result->fetch_row()) {
 
 echo json_encode($rows);
 }
+
+              
+$md5Processed = array();
+
+$newArray = array_filter($array, "uniqueMD5");
+
+print_r($newArray);
+
+exit;
+
+function uniqueMD5( $data ){
+    global $md5Processed;
+
+    if( !in_array( $data['category'], $md5Processed ) )
+    {
+        $md5Processed[] = $data['category'];
+        return true;
+    }
+}
